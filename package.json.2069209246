@@ -1,0 +1,38 @@
+{
+  "name": "webconnect",
+  "version": "1.0.0",
+  "description": "A chat application built with node.js,express,socket.io and mongodb",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aashna27/WebConnect.git"
+  },
+  "author": "Aashna Mittal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aashna27/WebConnect/issues"
+  },
+  "homepage": "https://github.com/aashna27/WebConnect#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^2.0.1",
+    "cookie-parser": "^1.4.3",
+    "dependable": "^1.1.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "express-promise-router": "^3.0.2",
+    "express-session": "^1.15.6",
+    "express-validator": "^5.2.0",
+    "lodash": "^4.17.10",
+    "mongoose": "^5.1.5",
+    "passport": "^0.4.0",
+    "passport-facebook": "^2.1.1",
+    "passport-google-oauth": "^1.0.0",
+    "passport-local": "^1.0.0",
+    "react": "^16.4.1"
+  }
+}
