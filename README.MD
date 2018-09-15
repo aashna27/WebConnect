@@ -1,1 +1,1 @@
-Testing
+This is a chat Application created with socket.io in node.js 

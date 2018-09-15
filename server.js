@@ -24,10 +24,10 @@ container.resolve(function(users,_,home,group,privatechat){    // resolve functi
     mongoose.Promise = global.Promise;
     // mongodb://localhost/WebConnect
     // mongodb://<dbuser>:<dbpassword>@ds249092.mlab.com:49092/webconnect
-     mongoose.connect('mongodb://adminwebconnect:aashna27@ds249092.mlab.com:49092/webconnect'/*,{useMongoClient: true}*/ ).then(res => console.log("Connected to DB"))
+   //  mongoose.connect('mongodb://adminwebconnect:aashna27@ds249092.mlab.com:49092/webconnect'/*,{useMongoClient: true}*/ ).then(res => console.log("Connected to DB"))
+ //   .catch(err => console.log(err));
+ mongoose.connect(process.env.MONGODB_URI,/*,{useMongoClient: true}*/ ).then(res => console.log("Connected to DB"))
     .catch(err => console.log(err));
-// mongoose.connect(process.env.MONGODB_URI,/*,{useMongoClient: true}*/ ).then(res => console.log("Connected to DB"))
-//    .catch(err => console.log(err));
     const app = SetupExpress();
 
     function SetupExpress(){          // we setup the configurations
@@ -78,8 +78,8 @@ container.resolve(function(users,_,home,group,privatechat){    // resolve functi
 
         app.use(validator());
         app.use(session({
-            secret: 'thisisasecretkey',
-          // secret: process.env.SECRET_KEY,
+           // secret: 'thisisasecretkey',
+           secret: process.env.SECRET_KEY,
             resave: false,// Forces the session to be saved back to the session store, even if the session was never modified during the request. 
             saveUninitialized: true,
            store: new MongoStore({mongooseConnection: mongoose.connection})
