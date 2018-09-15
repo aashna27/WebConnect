@@ -12,6 +12,8 @@ const passport = require('passport');
 const socketIO = require('socket.io');
 const {Users} = require('./helpers/UsersClass');
 const {Global} = require('./helpers/Global');
+const compression = require('compression');
+const helmet = require('helmet');
 
 
 
@@ -20,8 +22,12 @@ const container = require('./container');
 
 container.resolve(function(users,_,home,group,privatechat){    // resolve function resolves any files or modules added to dependable container
     mongoose.Promise = global.Promise;
-    mongoose.connect('mongodb://localhost/WebConnect'/*,{useMongoClient: true}*/ ).then(res => console.log("Connected to DB"))
-   .catch(err => console.log(err));
+    // mongodb://localhost/WebConnect
+    // mongodb://<dbuser>:<dbpassword>@ds249092.mlab.com:49092/webconnect
+     mongoose.connect('mongodb://adminwebconnect:aashna27@ds249092.mlab.com:49092/webconnect'/*,{useMongoClient: true}*/ ).then(res => console.log("Connected to DB"))
+    .catch(err => console.log(err));
+// mongoose.connect(process.env.MONGODB_URI,/*,{useMongoClient: true}*/ ).then(res => console.log("Connected to DB"))
+//    .catch(err => console.log(err));
     const app = SetupExpress();
 
     function SetupExpress(){          // we setup the configurations
@@ -29,7 +35,7 @@ container.resolve(function(users,_,home,group,privatechat){    // resolve functi
         const server =http.createServer(app);
         const io = socketIO(server);  // socket io requires app and http both
         // there is a different file for server side socket.io for readability 
-        server.listen(3000, function(){
+        server.listen(process.env.PORT || 3000, function(){
             console.log('Listening on port 3000');
         });
 
@@ -48,9 +54,17 @@ container.resolve(function(users,_,home,group,privatechat){    // resolve functi
 
         app.use(router);
 
+        app.use(function(req,res){
+            res.render('404');
+        });
+
     }
 
     function ConfigureExpress(app){
+
+        app.use(compression());
+        app.use(helmet());
+
         require('./passport/passport-local');
         require('./passport/passport-facebook');
         require('./passport/passport-google');
@@ -65,6 +79,7 @@ container.resolve(function(users,_,home,group,privatechat){    // resolve functi
         app.use(validator());
         app.use(session({
             secret: 'thisisasecretkey',
+          // secret: process.env.SECRET_KEY,
             resave: false,// Forces the session to be saved back to the session store, even if the session was never modified during the request. 
             saveUninitialized: true,
            store: new MongoStore({mongooseConnection: mongoose.connection})
@@ -76,6 +91,8 @@ container.resolve(function(users,_,home,group,privatechat){    // resolve functi
         app.locals._ = _; // this express method makes lodash a global variable to be used in  any file
                             // even in ejs format 
                             // cz using dependable _ can be used only in js files 
+
+    
    
     }
 });

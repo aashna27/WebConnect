@@ -51,5 +51,7 @@ module.exports = function(io,Users){
 /* C:  '.\Program Files\MongoDB\Server\3.6\bin'  */
 /* cd /. */
 
+// ./mongod
+// ./mongo
 
 /* we emit an event when a user connects to a channnel , so all users and connected to that channel will receive that event */

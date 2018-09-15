@@ -1,4 +1,3 @@
-
 'use strict';
 
 const passport = require('passport');
@@ -59,5 +58,3 @@ passport.use(new FacebookStrategy({
 
           }});  
 }));
-
-

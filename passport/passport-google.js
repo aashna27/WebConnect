@@ -28,8 +28,8 @@ returns the user data corresponding to the id */
 /* if there are no errors err will be null and the user data is returned in 'user' object*/
 
 passport.use(new GoogleStrategy({
-     clientID:secret.google.clientID,
-     clientSecret: secret.google.clientSecret,
+     clientID: process.env.GOOGLE_CLIENT_ID,// secret.google.clientID,
+     clientSecret: process.env.GOOGLE_CLIENT_SECRET, //secret.google.clientSecret,
      callbackURL: 'http://localhost:3000/auth/google/callback',
      passReqToCallback: true // allows above data to be passed in callback
  
