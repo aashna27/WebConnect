@@ -30,7 +30,7 @@ returns the user data corresponding to the id */
 passport.use(new GoogleStrategy({
      clientID: process.env.GOOGLE_CLIENT_ID,// secret.google.clientID,
      clientSecret: process.env.GOOGLE_CLIENT_SECRET, //secret.google.clientSecret,
-     callbackURL: 'http://localhost:3000/auth/google/callback',
+     callbackURL:   'https://web-connect.herokuapp/auth/google/callback',//'http://localhost:3000/auth/google/callback',
      passReqToCallback: true // allows above data to be passed in callback
  
 },(req,accesstoken, refreshToken, profile ,done)=>{ // profile field has all user info if it exists 
