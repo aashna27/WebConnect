@@ -27,10 +27,10 @@ returns the user data corresponding to the id */
 /* if there are no errors err will be null and the user data is returned in 'user' object*/
 
 passport.use(new FacebookStrategy({
-     clientID:secret.facebook.clientID,
-     clientSecret: secret.facebook.clientSecret,
-     profileFields: secret.facebook.profileFields,
-     callbackURL:secret.facebook.callbackURL,
+     clientID: process.env.FB_CLIENTID,            //secret.facebook.clientID,
+     clientSecret: process.env.FB_CLIENT_SECRET ,  //secret.facebook.clientSecret,
+     profileFields:  ['email','displayName','photos'],//secret.facebook.profileFields,
+     callbackURL: 'http://localhost:3000/auth/facebook/callback',//secret.facebook.callbackURL,
      passReqToCallback: true // allows above data to be passed in callback
  
 },(req,token, refreshToken, profile ,done)=>{ // profile field has all user info if it exists 

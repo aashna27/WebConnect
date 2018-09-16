@@ -26,7 +26,8 @@ container.resolve(function(users,_,home,group,privatechat){    // resolve functi
     // mongodb://<dbuser>:<dbpassword>@ds249092.mlab.com:49092/webconnect
    //  mongoose.connect('mongodb://adminwebconnect:aashna27@ds249092.mlab.com:49092/webconnect'/*,{useMongoClient: true}*/ ).then(res => console.log("Connected to DB"))
  //   .catch(err => console.log(err));
- mongoose.connect(process.env.MONGODB_URI,/*,{useMongoClient: true}*/ ).then(res => console.log("Connected to DB"))
+                            
+ mongoose.connect(process.env.MONGODB_URI).then(res => console.log("Connected to DB"))
     .catch(err => console.log(err));
     const app = SetupExpress();
 
@@ -35,7 +36,7 @@ container.resolve(function(users,_,home,group,privatechat){    // resolve functi
         const server =http.createServer(app);
         const io = socketIO(server);  // socket io requires app and http both
         // there is a different file for server side socket.io for readability 
-        server.listen(process.env.PORT || 3000, function(){
+        server.listen(process.env.PORT , function(){
             console.log('Listening on port 3000');
         });
 
@@ -78,7 +79,7 @@ container.resolve(function(users,_,home,group,privatechat){    // resolve functi
 
         app.use(validator());
         app.use(session({
-           // secret: 'thisisasecretkey',
+            // secret: 'thisisasecretkey',
            secret: process.env.SECRET_KEY,
             resave: false,// Forces the session to be saved back to the session store, even if the session was never modified during the request. 
             saveUninitialized: true,
