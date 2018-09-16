@@ -36,7 +36,7 @@ container.resolve(function(users,_,home,group,privatechat){    // resolve functi
         const server =http.createServer(app);
         const io = socketIO(server);  // socket io requires app and http both
         // there is a different file for server side socket.io for readability 
-        server.listen(process.env.PORT , function(){
+        server.listen(process.env.PORT || 3000 , function(){
             console.log('Listening on port 3000');
         });
 
